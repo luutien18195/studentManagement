@@ -23,15 +23,15 @@ public enum ApplicationUserRole {
         return persmissions;
     }
 
-//    public Set<SimpleGrantedAuthority> getSimpleGrantedAuthority() {
-//        Set<SimpleGrantedAuthority> persmissions =  getPersmissions()
-//                .stream()
-//                .map(persmission -> new SimpleGrantedAuthority(persmission.getPersmission()))
-//                .collect(Collectors.toSet());
-//
-//        persmissions.add(new SimpleGrantedAuthority("ROLE_" + this.name()));
-//
-//        return persmissions;
-//    }
+    public Set<SimpleGrantedAuthority> getGrantedAuthority() {
+        Set<SimpleGrantedAuthority> persmissions =  getPersmissions()
+                .stream()
+                .map(persmission -> new SimpleGrantedAuthority(persmission.getPersmission()))
+                .collect(Collectors.toSet());
+
+        persmissions.add(new SimpleGrantedAuthority("ROLE_" + this.name()));
+
+        return persmissions;
+    }
 
 }
