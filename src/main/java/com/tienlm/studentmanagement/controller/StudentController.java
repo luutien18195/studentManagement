@@ -29,7 +29,7 @@ public class StudentController {
     }
 
     @GetMapping(value = "/students")
-//    @PreAuthorize("hasAnyRole('ROLE_ADMIN, ROLE_USER')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     public ResponseEntity<?> getAll(){
         List<Student> students = this.studentRepository.findAll();
 
@@ -40,7 +40,7 @@ public class StudentController {
     }
 
     @PostMapping(value = "/students")
-//    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('student:create')")
     public ResponseEntity<?> createNew(@RequestBody Student student){
         this.studentRepository.save(student);
 
@@ -48,7 +48,7 @@ public class StudentController {
     }
 
     @GetMapping(value = "/students/{id}")
-//    @PreAuthorize("hasAnyRole('ROLE_ADMIN, ROLE_USER')")
+    @PreAuthorize("hasAuthority('student:read')")
     public ResponseEntity<?> getById(@PathVariable("id") String id){
         Optional<Student> student = this.studentRepository.findById(id);
 
@@ -60,7 +60,7 @@ public class StudentController {
     }
 
     @PutMapping(value = "/students/{id}")
-//    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('student:update')")
     public ResponseEntity<?> updateById(@PathVariable("id") String id, @RequestBody Student currentStudent){
         this.studentRepository.save(currentStudent);
 
@@ -69,7 +69,7 @@ public class StudentController {
     }
 
     @DeleteMapping(value = "/students/{id}")
-//    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('student:delete')")
     public ResponseEntity<?> deleteById(@PathVariable("id") String id, @RequestBody Student currentStudent){
         this.studentRepository.delete(currentStudent);
         Optional<Student> student = this.studentRepository.findById(id);
