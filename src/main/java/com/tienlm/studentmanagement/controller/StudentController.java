@@ -70,9 +70,9 @@ public class StudentController {
 
     @DeleteMapping(value = "/students/{id}")
     @PreAuthorize("hasAuthority('student:delete')")
-    public ResponseEntity<?> deleteById(@PathVariable("id") String id, @RequestBody Student currentStudent){
-        this.studentRepository.delete(currentStudent);
-        Optional<Student> student = this.studentRepository.findById(id);
+    public ResponseEntity<?> deleteById(@PathVariable("id") String id){
+        this.studentRepository.deleteById(id);
+//        Optional<Student> student = this.studentRepository.findById(id);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
